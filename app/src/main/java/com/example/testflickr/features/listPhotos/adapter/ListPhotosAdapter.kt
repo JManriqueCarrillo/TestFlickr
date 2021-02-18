@@ -9,9 +9,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testflickr.R
 import com.example.testflickr.entities.responses.PhotoResponse
+import com.example.testflickr.interfaces.ItemClickListener
 import com.squareup.picasso.Picasso
 
-class ListPhotosAdapter (private val context: Context, private val dataSet: List<PhotoResponse>) :
+class ListPhotosAdapter (private val context: Context, private val dataSet: List<PhotoResponse>, private val callback: ItemClickListener) :
     RecyclerView.Adapter<ListPhotosAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -35,6 +36,9 @@ class ListPhotosAdapter (private val context: Context, private val dataSet: List
         Picasso.with(context).load("https://live.staticflickr.com/${dataSet[position].server}/${dataSet[position].id}_${dataSet[position].secret}.jpg").into(viewHolder.itemThumbnail);
         viewHolder.itemTitle.text = dataSet[position].title
         viewHolder.itemAuthor.text = dataSet[position].ownerName
+        viewHolder.itemView.setOnClickListener {
+            callback.onItemClickListener(dataSet[position])
+        }
     }
 
     override fun getItemCount() = dataSet.size
