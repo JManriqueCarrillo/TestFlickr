@@ -34,6 +34,10 @@ class ListPhotosModel: ContractInterface.Model {
             override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {
                 if(response?.isSuccessful){
                     Log.d(TAG, "Success")
+                    var body = response.body()
+                    if (body != null) {
+                        presenter?.showSearchList(body.photos.photo)
+                    }
                 } else {
                     presenter?.showError("Error downloadRates")
                     Log.d(TAG, "Error downloadRates")

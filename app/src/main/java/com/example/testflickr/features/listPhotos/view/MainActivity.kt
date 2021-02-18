@@ -1,19 +1,27 @@
 package com.example.testflickr.features.listPhotos.view
 
+import android.app.SearchManager
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testflickr.R
 import com.example.testflickr.databinding.ActivityMainBinding
+import com.example.testflickr.entities.responses.PhotoResponse
 import com.example.testflickr.features.listPhotos.contract.ContractInterface
 import com.example.testflickr.features.listPhotos.presenter.ListPhotosPresenter
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.view.*
+import com.example.testflickr.features.listPhotos.adapter.ListPhotosAdapter
 import java.math.BigDecimal
 
-class MainActivity : AppCompatActivity(), ContractInterface.View {
+class MainActivity : AppCompatActivity(), ContractInterface.View, SearchView.OnQueryTextListener {
 
     private lateinit var binding: ActivityMainBinding
     private var presenter: ListPhotosPresenter? = null
+    private lateinit var searchView : SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,11 +32,7 @@ class MainActivity : AppCompatActivity(), ContractInterface.View {
 
 
         presenter = ListPhotosPresenter(this)
-        presenter?.searchPhotos("cat")
-
-        Picasso.get().load("https://live.staticflickr.com/65535/50952655756_4e0c5e0834.jpg").into(binding.image);
-
-        //presenter?.getPhotoUrl("65535", "50952655756")
+        //presenter?.searchPhotos("cat")
 
     }
 
@@ -52,7 +56,42 @@ class MainActivity : AppCompatActivity(), ContractInterface.View {
 
     }
 
-    override fun showTransactionsList(transactionsMap: List<String>) {
-
+    override fun showSearchList(data: List<PhotoResponse>) {
+        binding.thumbnailsList.adapter = ListPhotosAdapter(this, data)
+        binding.thumbnailsList.layoutManager = LinearLayoutManager(this)
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.search_menu, menu)
+
+        // Associate searchable configuration with the SearchView
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        searchView = menu.findItem(R.id.action_search).actionView as SearchView
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        searchView.setOnQueryTextListener(this)
+        searchView.queryHint = "Search View Hint";
+
+        return true
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        query?.let { presenter?.searchPhotos(it) }
+        binding.root.hideKeyboard()
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        return true
+    }
+
+    private fun View.showKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+    }
+
+    private fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
+    }
+
 }

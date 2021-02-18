@@ -1,5 +1,6 @@
 package com.example.testflickr.features.listPhotos.presenter
 
+import com.example.testflickr.entities.responses.PhotoResponse
 import com.example.testflickr.features.listPhotos.contract.ContractInterface
 import com.example.testflickr.features.listPhotos.model.ListPhotosModel
 
@@ -12,6 +13,10 @@ class ListPhotosPresenter(_view: ContractInterface.View): ContractInterface.Pres
     override fun searchPhotos(tag: String) {
        // view?.showProgress()
         model?.searchPhotos(this, tag)
+    }
+
+    override fun showSearchList(data: List<PhotoResponse>) {
+        view?.showSearchList(data)
     }
 
     override fun getPhotoUrl(serverId: String, id:String){

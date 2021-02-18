@@ -1,5 +1,6 @@
 package com.example.testflickr.features.listPhotos.contract
 
+import com.example.testflickr.entities.responses.PhotoResponse
 import java.math.BigDecimal
 
 interface ContractInterface {
@@ -11,11 +12,12 @@ interface ContractInterface {
 
         fun updateButtonEnable()
         fun showDialogFragment(transactionsMap: MutableMap<String, MutableMap<String, BigDecimal>>)
-        fun showTransactionsList(transactionsMap: List<String>)
+        fun showSearchList(data: List<PhotoResponse>)
     }
 
     interface Presenter{
         fun searchPhotos(tag: String)
+        fun showSearchList(data: List<PhotoResponse>)
         fun getPhotoUrl(serverId: String, id: String)
 
         fun showError(text: String)

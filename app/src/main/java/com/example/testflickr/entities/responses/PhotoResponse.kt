@@ -12,4 +12,7 @@ class PhotoResponse {
     @SerializedName("ispublic") var ispublic = 0
     @SerializedName("isfriend") var isfriend = 0
     @SerializedName("isfamily") var isfamily = 0
+    @SerializedName("description") lateinit var description : DescriptionPhotoResponse
+    @SerializedName("lastupdate") var lastUpdate = ""
+    @SerializedName("ownername") var ownerName = ""
 }
