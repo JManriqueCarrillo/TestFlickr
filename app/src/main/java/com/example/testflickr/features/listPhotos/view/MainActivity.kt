@@ -49,10 +49,6 @@ class MainActivity : AppCompatActivity(), ContractInterface.View, SearchView.OnQ
         Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
 
-    override fun showDialogFragment(transactionsMap: MutableMap<String, MutableMap<String, BigDecimal>>) {
-
-    }
-
     override fun showSearchList(data: List<PhotoResponse>) {
         if(data.isEmpty()){
             binding.noResultsLayout.visibility = View.VISIBLE

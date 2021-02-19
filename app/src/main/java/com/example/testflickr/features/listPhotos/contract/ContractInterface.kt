@@ -10,7 +10,6 @@ interface ContractInterface {
         fun hideProgress()
         fun showError(text: String)
 
-        fun showDialogFragment(transactionsMap: MutableMap<String, MutableMap<String, BigDecimal>>)
         fun showSearchList(data: List<PhotoResponse>)
     }
 

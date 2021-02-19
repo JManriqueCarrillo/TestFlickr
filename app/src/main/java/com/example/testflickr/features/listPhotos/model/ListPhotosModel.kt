@@ -20,9 +20,6 @@ class ListPhotosModel: ContractInterface.Model {
     }
 
     private var webService: ServiceInterface? = null
-    private lateinit var ratesMap: Map<String?, Map<String?, BigDecimal>>
-    private lateinit var transactionsDetailsMap: Map<String?, List<String>>
-    private lateinit var transactionsMap: MutableMap<String, MutableMap<String, BigDecimal>>
 
     init{
         webService = ServiceAPI.client.create(ServiceInterface::class.java)
@@ -39,13 +36,13 @@ class ListPhotosModel: ContractInterface.Model {
                         presenter?.showSearchList(body.photos.photo)
                     }
                 } else {
-                    presenter?.showError("Error downloadRates")
-                    Log.d(TAG, "Error downloadRates")
+                    presenter?.showError("Error searching photos")
+                    Log.d(TAG, "Error searching photos")
                 }
             }
 
             override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
-                presenter?.showError("Error downloadRates: ${t.message}")
+                presenter?.showError("Error searching photos: ${t.message}")
                 Log.d(TAG, "Failure ${t.message}")
             }
         })
