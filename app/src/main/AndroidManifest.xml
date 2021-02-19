@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".features.detailPhoto.view.DetailActivity"/>
+        <activity android:name=".features.imageScreen.ImageActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

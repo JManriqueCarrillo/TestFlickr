@@ -9,6 +9,7 @@ import android.os.Environment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.example.testflickr.databinding.ActivityDetailBinding
+import com.example.testflickr.features.imageScreen.ImageActivity
 import com.example.testflickr.utils.DateUtils
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Picasso.LoadedFrom
@@ -62,10 +63,15 @@ class DetailActivity : AppCompatActivity() {
         binding.shareButton.setOnClickListener {
             shareItem(imageUrl)
         }
+
+        binding.detailImage.setOnClickListener{
+            val intent = Intent(this, ImageActivity::class.java)
+            intent.putExtra(DetailActivity.PARAM_IMAGE_URL, imageUrl)
+            startActivity(intent)
+        }
      }
 
     fun shareItem(url: String?) {
-
         Picasso.with(applicationContext).load(url).into(object : Target {
             override fun onBitmapLoaded(bitmap: Bitmap?, from: LoadedFrom?) {
                 val intent = Intent(Intent.ACTION_SEND)
