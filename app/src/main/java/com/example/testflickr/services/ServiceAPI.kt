@@ -14,8 +14,6 @@ class ServiceAPI {
         private var okHttpClient: OkHttpClient? = null
         private var retrofit: Retrofit? = null
 
-
-
         val client: Retrofit
             get() {
                 if (retrofit == null) {

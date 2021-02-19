@@ -9,7 +9,6 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ServiceInterface {
@@ -19,25 +18,5 @@ interface ServiceInterface {
                      @Query("tags") tags:String,
                      @Query("extras") extras: String): Call<SearchResponse>
 
-
-
-    companion object {
-        fun create(serverUrl: String): ServiceInterface {
-
-            val interceptor = HttpLoggingInterceptor()
-            interceptor.level = HttpLoggingInterceptor.Level.BODY
-
-            val client = OkHttpClient.Builder()
-                    .addInterceptor(interceptor)
-                    .build()
-            val retrofit = Retrofit.Builder()
-                    .baseUrl(serverUrl)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .client(client)
-                    .build()
-
-            return retrofit.create(ServiceInterface::class.java)
-        }
-    }
 
 }

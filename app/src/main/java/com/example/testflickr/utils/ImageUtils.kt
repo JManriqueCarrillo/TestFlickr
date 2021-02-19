@@ -23,7 +23,7 @@ class ImageUtils {
                 val out = FileOutputStream(file)
                 bmp.compress(Bitmap.CompressFormat.PNG, 90, out)
                 out.close()
-                bmpUri = FileProvider.getUriForFile(ctx, ctx.getApplicationContext().getPackageName().toString() + ".provider", file)
+                bmpUri = FileProvider.getUriForFile(ctx, ctx.applicationContext.packageName.toString() + ".provider", file)
             } catch (e: IOException) {
                 e.printStackTrace()
             }

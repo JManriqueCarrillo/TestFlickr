@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="20dp"
-        android:text="Share"/>
+        android:layout_marginEnd="20dp"
+        android:text="@string/detail_btn_share"/>
 
     <ImageView
         android:id="@+id/detail_image"
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        android:text="Tap to zoom"
+        android:text="@string/detail_tap_zoom"
         app:layout_constraintTop_toBottomOf="@id/detail_image"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@id/detail_image"
         tools:text="Detail image"
         android:layout_marginTop="40dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginStart="10dp"/>
 
     <TextView
         android:id="@+id/detail_author"
@@ -53,7 +53,7 @@
         app:layout_constraintTop_toBottomOf="@id/detail_title"
         tools:text="Detail author"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginStart="10dp"/>
 
     <TextView
         android:id="@+id/detail_date"
@@ -64,7 +64,7 @@
         app:layout_constraintTop_toBottomOf="@id/detail_author"
         tools:text="Detail date"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginStart="10dp"/>
 
     <TextView
         android:id="@+id/detail_description"
@@ -75,6 +75,6 @@
         app:layout_constraintTop_toBottomOf="@id/detail_date"
         tools:text="Detail image"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginStart="10dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

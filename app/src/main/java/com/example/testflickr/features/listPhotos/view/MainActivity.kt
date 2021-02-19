@@ -3,23 +3,22 @@ package com.example.testflickr.features.listPhotos.view
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testflickr.R
 import com.example.testflickr.databinding.ActivityMainBinding
 import com.example.testflickr.entities.responses.PhotoResponse
 import com.example.testflickr.features.detailPhoto.view.DetailActivity
+import com.example.testflickr.features.listPhotos.adapter.ListPhotosAdapter
 import com.example.testflickr.features.listPhotos.contract.ContractInterface
 import com.example.testflickr.features.listPhotos.presenter.ListPhotosPresenter
-import com.example.testflickr.features.listPhotos.adapter.ListPhotosAdapter
 import com.example.testflickr.interfaces.ItemClickListener
-import java.math.BigDecimal
 
 class MainActivity : AppCompatActivity(), ContractInterface.View, SearchView.OnQueryTextListener, ItemClickListener {
 
@@ -69,7 +68,7 @@ class MainActivity : AppCompatActivity(), ContractInterface.View, SearchView.OnQ
         searchView = menu.findItem(R.id.action_search).actionView as SearchView
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.setOnQueryTextListener(this)
-        searchView.queryHint = "Search View Hint";
+        searchView.queryHint = getString(R.string.search_hint)
 
         return true
     }

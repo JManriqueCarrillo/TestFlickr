@@ -1,7 +1,6 @@
 package com.example.testflickr.features.listPhotos.contract
 
 import com.example.testflickr.entities.responses.PhotoResponse
-import java.math.BigDecimal
 
 interface ContractInterface {
 
@@ -21,7 +20,7 @@ interface ContractInterface {
     }
 
     interface Model{
-        fun searchPhotos(presenter: ContractInterface.Presenter, tag: String, extras: String)
+        fun searchPhotos(presenter: Presenter, tag: String, extras: String)
     }
 
 }

@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">TestFlickr</string>
+
+    <string name="menu_search">Search</string>
+    <string name="search_hint">Search View Hint</string>
+
+    <string name="list_no_results">No results found</string>
+    <string name="loading">Please wait ...</string>
+
+    <string name="detail_btn_share">Share</string>
+    <string name="detail_tap_zoom">Tap to zoom</string>
+    <string name="detail_title">Title: %s</string>
+    <string name="detail_description">Description: %s</string>
+    <string name="detail_author">Author: %s</string>
+    <string name="detail_date">Date: %s</string>
+
 </resources>

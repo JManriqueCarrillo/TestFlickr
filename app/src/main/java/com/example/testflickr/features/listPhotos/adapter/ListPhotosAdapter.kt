@@ -33,7 +33,7 @@ class ListPhotosAdapter (private val context: Context, private val dataSet: List
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        Picasso.with(context).load("https://live.staticflickr.com/${dataSet[position].server}/${dataSet[position].id}_${dataSet[position].secret}.jpg").into(viewHolder.itemThumbnail);
+        Picasso.with(context).load("https://live.staticflickr.com/${dataSet[position].server}/${dataSet[position].id}_${dataSet[position].secret}.jpg").into(viewHolder.itemThumbnail)
         viewHolder.itemTitle.text = dataSet[position].title
         viewHolder.itemAuthor.text = dataSet[position].ownerName
         viewHolder.itemView.setOnClickListener {

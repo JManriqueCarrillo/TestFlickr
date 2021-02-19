@@ -3,11 +3,9 @@ package com.example.testflickr.features.detailPhoto.view
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.FileProvider
+import com.example.testflickr.R
 import com.example.testflickr.databinding.ActivityDetailBinding
 import com.example.testflickr.features.imageScreen.ImageActivity
 import com.example.testflickr.utils.DateUtils
@@ -15,18 +13,15 @@ import com.example.testflickr.utils.ImageUtils
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Picasso.LoadedFrom
 import com.squareup.picasso.Target
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 
 class DetailActivity : AppCompatActivity() {
 
     companion object{
-        val PARAM_IMAGE_URL = "param_image_url"
-        val PARAM_IMAGE_TITLE = "param_image_title"
-        val PARAM_IMAGE_AUTHOR = "param_image_author"
-        val PARAM_IMAGE_DESCRIPTION = "param_image_description"
-        val PARAM_IMAGE_DATE = "param_image_date"
+        const val PARAM_IMAGE_URL = "param_image_url"
+        const val PARAM_IMAGE_TITLE = "param_image_title"
+        const val PARAM_IMAGE_AUTHOR = "param_image_author"
+        const val PARAM_IMAGE_DESCRIPTION = "param_image_description"
+        const val PARAM_IMAGE_DATE = "param_image_date"
     }
 
     private lateinit var binding: ActivityDetailBinding
@@ -55,10 +50,10 @@ class DetailActivity : AppCompatActivity() {
 
     private fun loadView(){
         Picasso.with(this).load(imageUrl).into(binding.detailImage)
-        binding.detailTitle.text = imageTitle
-        binding.detailAuthor.text = imageAuthor
-        binding.detailDescription.text = imageDescription
-        binding.detailDate.text = DateUtils.getDateTime(imageDate)
+        binding.detailTitle.text = getString(R.string.detail_title, imageTitle)
+        binding.detailAuthor.text = getString(R.string.detail_author, imageAuthor)
+        binding.detailDescription.text = getString(R.string.detail_description, imageDescription)
+        binding.detailDate.text = getString(R.string.detail_date, DateUtils.getDateTime(imageDate))
 
         binding.shareButton.setOnClickListener {
             shareItem(imageUrl)
@@ -66,7 +61,7 @@ class DetailActivity : AppCompatActivity() {
 
         binding.detailImage.setOnClickListener{
             val intent = Intent(this, ImageActivity::class.java)
-            intent.putExtra(DetailActivity.PARAM_IMAGE_URL, imageUrl)
+            intent.putExtra(PARAM_IMAGE_URL, imageUrl)
             startActivity(intent)
         }
      }
@@ -77,7 +72,7 @@ class DetailActivity : AppCompatActivity() {
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.type = "image/*"
                 intent.putExtra(Intent.EXTRA_STREAM, ImageUtils.getLocalBitmapUri(applicationContext, bitmap!!))
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 startActivity(Intent.createChooser(intent, "Share Image"))
             }
 
