@@ -28,15 +28,10 @@ class MainActivity : AppCompatActivity(), ContractInterface.View, SearchView.OnQ
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
-
         presenter = ListPhotosPresenter(this)
-        //presenter?.searchPhotos("cat")
-
     }
 
     override fun showProgress() {
@@ -60,8 +55,15 @@ class MainActivity : AppCompatActivity(), ContractInterface.View, SearchView.OnQ
     }
 
     override fun showSearchList(data: List<PhotoResponse>) {
-        binding.thumbnailsList.adapter = ListPhotosAdapter(this, data, this)
-        binding.thumbnailsList.layoutManager = LinearLayoutManager(this)
+        if(data.isEmpty()){
+            binding.noResultsLayout.visibility = View.VISIBLE
+            binding.thumbnailsList.visibility = View.GONE
+        } else{
+            binding.thumbnailsList.adapter = ListPhotosAdapter(this, data, this)
+            binding.thumbnailsList.layoutManager = LinearLayoutManager(this)
+            binding.noResultsLayout.visibility = View.GONE
+            binding.thumbnailsList.visibility = View.VISIBLE
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

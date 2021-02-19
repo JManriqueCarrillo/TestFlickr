@@ -1,9 +1,22 @@
 package com.example.testflickr.features.detailPhoto.view
 
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import com.example.testflickr.databinding.ActivityDetailBinding
+import com.example.testflickr.utils.DateUtils
 import com.squareup.picasso.Picasso
+import com.squareup.picasso.Picasso.LoadedFrom
+import com.squareup.picasso.Target
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+
 
 class DetailActivity : AppCompatActivity() {
 
@@ -44,6 +57,44 @@ class DetailActivity : AppCompatActivity() {
         binding.detailTitle.text = imageTitle
         binding.detailAuthor.text = imageAuthor
         binding.detailDescription.text = imageDescription
-        binding.detailDate.text = imageDate
+        binding.detailDate.text = DateUtils.getDateTime(imageDate)
+
+        binding.shareButton.setOnClickListener {
+            shareItem(imageUrl)
+        }
      }
+
+    fun shareItem(url: String?) {
+
+        Picasso.with(applicationContext).load(url).into(object : Target {
+            override fun onBitmapLoaded(bitmap: Bitmap?, from: LoadedFrom?) {
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.type = "image/*"
+                intent.putExtra(Intent.EXTRA_STREAM, getLocalBitmapUri(bitmap!!))
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                startActivity(Intent.createChooser(intent, "Share Image"))
+            }
+
+            override fun onBitmapFailed(errorDrawable: Drawable?) {}
+            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {}
+        })
+    }
+
+    fun getLocalBitmapUri(bmp: Bitmap): Uri? {
+        var bmpUri: Uri? = null
+        try {
+            val file = File(
+                getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                "share_image_" + System.currentTimeMillis() + ".png"
+            )
+            val out = FileOutputStream(file)
+            bmp.compress(Bitmap.CompressFormat.PNG, 90, out)
+            out.close()
+            bmpUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName().toString() + ".provider", file)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return bmpUri
+    }
+
 }
