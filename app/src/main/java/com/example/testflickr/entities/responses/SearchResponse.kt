@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 class SearchResponse {
     @SerializedName("photos") lateinit var photos: PhotosDataResponse
-    @SerializedName("stat") var stat: String? = null
+    @SerializedName("stat") var stat: String = ""
 }

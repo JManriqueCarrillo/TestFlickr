@@ -38,6 +38,7 @@ class DetailActivity : AppCompatActivity() {
 
         getParams()
         loadView()
+        setListeners()
     }
 
     private fun getParams(){
@@ -54,7 +55,9 @@ class DetailActivity : AppCompatActivity() {
         binding.detailAuthor.text = getString(R.string.detail_author, imageAuthor)
         binding.detailDescription.text = getString(R.string.detail_description, imageDescription)
         binding.detailDate.text = getString(R.string.detail_date, DateUtils.getDateTime(imageDate))
+     }
 
+    private fun setListeners(){
         binding.shareButton.setOnClickListener {
             shareItem(imageUrl)
         }
@@ -64,7 +67,7 @@ class DetailActivity : AppCompatActivity() {
             intent.putExtra(PARAM_IMAGE_URL, imageUrl)
             startActivity(intent)
         }
-     }
+    }
 
     private fun shareItem(url: String?) {
         Picasso.with(applicationContext).load(url).into(object : Target {

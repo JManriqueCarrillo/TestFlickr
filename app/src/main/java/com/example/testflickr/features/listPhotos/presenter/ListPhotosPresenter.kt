@@ -21,6 +21,7 @@ class ListPhotosPresenter(_view: ContractInterface.View): ContractInterface.Pres
     }
 
     override fun showError(text: String) {
+        view.hideProgress()
         view.showError(text)
     }
 

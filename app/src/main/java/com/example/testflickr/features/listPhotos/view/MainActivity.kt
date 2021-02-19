@@ -35,19 +35,6 @@ class MainActivity : AppCompatActivity(), ContractInterface.View, SearchView.OnQ
         presenter = ListPhotosPresenter(this)
     }
 
-    override fun showProgress() {
-        binding.progressBarLayout.visibility = View.VISIBLE
-    }
-
-    override fun hideProgress() {
-        binding.progressBarLayout.visibility = View.GONE
-    }
-
-    override fun showError(text: String) {
-        binding.progressBarLayout.visibility = View.GONE
-        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
-    }
-
     override fun showSearchList(data: List<PhotoResponse>) {
         if(data.isEmpty()){
             binding.noResultsLayout.visibility = View.VISIBLE
@@ -102,6 +89,19 @@ class MainActivity : AppCompatActivity(), ContractInterface.View, SearchView.OnQ
         intent.putExtra(DetailActivity.PARAM_IMAGE_DESCRIPTION, item.description.content)
         intent.putExtra(DetailActivity.PARAM_IMAGE_DATE, item.lastUpdate)
         startActivity(intent)
+    }
+
+    override fun showProgress() {
+        binding.progressBarLayout.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        binding.progressBarLayout.visibility = View.GONE
+    }
+
+    override fun showError(text: String) {
+        binding.progressBarLayout.visibility = View.GONE
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
 
 }

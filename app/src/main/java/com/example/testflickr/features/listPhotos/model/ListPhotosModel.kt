@@ -16,21 +16,24 @@ class ListPhotosModel: ContractInterface.Model {
         const val TAG = "ListPhotos"
     }
 
-    private var webService: ServiceInterface? = null
+    private var webService: ServiceInterface
 
     init{
         webService = ServiceAPI.client.create(ServiceInterface::class.java)
     }
 
     override fun searchPhotos(presenter: ContractInterface.Presenter, tag: String, extras:String) {
-        val call = this.webService?.searchPhotos(Constant.API_KEY, tag, extras)
-        call?.enqueue(object : Callback<SearchResponse> {
+        val call = this.webService.searchPhotos(Constant.API_KEY, tag, extras)
+        call.enqueue(object : Callback<SearchResponse> {
             override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {
                 if(response.isSuccessful){
                     Log.d(TAG, "Success")
                     val body = response.body()
-                    if (body != null) {
+                    if (body != null && body.stat == "ok") {
                         presenter.showSearchList(body.photos.photo)
+                    } else{
+                        presenter.showError("Error searching photos")
+                        Log.d(TAG, "Error searching photos")
                     }
                 } else {
                     presenter.showError("Error searching photos")
