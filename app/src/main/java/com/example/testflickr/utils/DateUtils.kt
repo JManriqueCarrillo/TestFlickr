@@ -6,13 +6,13 @@ import java.util.*
 class DateUtils {
 
     companion object{
-        public fun getDateTime(s: String): String? {
-            try {
+        fun getDateTime(s: String): String? {
+            return try {
                 val sdf = SimpleDateFormat("dd/MM/yyyy")
                 val netDate = Date(s.toLong() * 1000)
-                return sdf.format(netDate)
+                sdf.format(netDate)
             } catch (e: Exception) {
-                return e.toString()
+                e.toString()
             }
         }
     }

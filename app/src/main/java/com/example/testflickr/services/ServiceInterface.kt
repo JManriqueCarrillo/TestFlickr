@@ -18,9 +18,7 @@ interface ServiceInterface {
     fun searchPhotos(@Query("api_key") apikey:String,
                      @Query("tags") tags:String): Call<SearchResponse>
 
-    @GET(Constant.PHOTO_URL)
-    fun getPhotoUrl(@Path("serverid") serverId: String,
-                    @Path("id") id: String): Call<String>
+
 
     companion object {
         fun create(serverUrl: String): ServiceInterface {

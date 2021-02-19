@@ -6,6 +6,5 @@ interface Constant {
         const val SECRET_KEY = "d53d1c40336954e3"
         const val BASE_URL = "https://www.flickr.com/services/rest/"
         const val SEARCH_URL = "?method=flickr.photos.search&format=json&nojsoncallback=1&extras=owner_name,description,last_update"
-        const val PHOTO_URL = "{serverid}/{id}_{secret}.jpg"
     }
 }

@@ -9,6 +9,7 @@ import android.view.Menu
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testflickr.R
 import com.example.testflickr.databinding.ActivityMainBinding
@@ -35,19 +36,16 @@ class MainActivity : AppCompatActivity(), ContractInterface.View, SearchView.OnQ
     }
 
     override fun showProgress() {
-
+        binding.progressBarLayout.visibility = View.VISIBLE
     }
 
     override fun hideProgress() {
-
+        binding.progressBarLayout.visibility = View.GONE
     }
 
     override fun showError(text: String) {
-
-    }
-
-    override fun updateButtonEnable() {
-
+        binding.progressBarLayout.visibility = View.GONE
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
 
     override fun showDialogFragment(transactionsMap: MutableMap<String, MutableMap<String, BigDecimal>>) {

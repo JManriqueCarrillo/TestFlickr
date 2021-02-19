@@ -50,23 +50,4 @@ class ListPhotosModel: ContractInterface.Model {
             }
         })
     }
-
-    override fun getPhotoUrl(serverId: String, id: String) {
-        val call = this.webService?.getPhotoUrl(serverId, id)
-        call?.enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                if(response?.isSuccessful){
-                    Log.d(TAG, "Success")
-                } else {
-
-                    Log.d(TAG, "Error downloadRates")
-                }
-            }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d(TAG, "Failure ${t.message}")
-            }
-        })
-    }
-
 }
