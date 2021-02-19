@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity(), ContractInterface.View, SearchView.OnQ
     private lateinit var binding: ActivityMainBinding
     private var presenter: ListPhotosPresenter? = null
     private lateinit var searchView : SearchView
+    private val EXTRAS_REQUEST = "owner_name,description,last_update"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +79,7 @@ class MainActivity : AppCompatActivity(), ContractInterface.View, SearchView.OnQ
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        query?.let { presenter?.searchPhotos(it) }
+        query?.let { presenter?.searchPhotos(it, EXTRAS_REQUEST) }
         binding.root.hideKeyboard()
         binding.root.requestFocus()
         return true

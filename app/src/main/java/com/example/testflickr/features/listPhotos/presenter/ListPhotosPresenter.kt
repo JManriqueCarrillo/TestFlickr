@@ -10,9 +10,9 @@ class ListPhotosPresenter(_view: ContractInterface.View): ContractInterface.Pres
     private var view: ContractInterface.View = _view
     private var model: ContractInterface.Model = ListPhotosModel()
 
-    override fun searchPhotos(tag: String) {
+    override fun searchPhotos(tag: String, extras: String) {
         view?.showProgress()
-        model?.searchPhotos(this, tag)
+        model?.searchPhotos(this, tag, extras)
     }
 
     override fun showSearchList(data: List<PhotoResponse>) {

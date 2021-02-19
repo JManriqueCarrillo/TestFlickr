@@ -16,7 +16,8 @@ interface ServiceInterface {
 
     @GET(Constant.SEARCH_URL)
     fun searchPhotos(@Query("api_key") apikey:String,
-                     @Query("tags") tags:String): Call<SearchResponse>
+                     @Query("tags") tags:String,
+                     @Query("extras") extras: String): Call<SearchResponse>
 
 
 

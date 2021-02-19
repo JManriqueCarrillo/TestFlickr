@@ -15,14 +15,14 @@ interface ContractInterface {
     }
 
     interface Presenter{
-        fun searchPhotos(tag: String)
+        fun searchPhotos(tag: String, extras: String)
         fun showSearchList(data: List<PhotoResponse>)
 
         fun showError(text: String)
     }
 
     interface Model{
-        fun searchPhotos(presenter: ContractInterface.Presenter, tag: String)
+        fun searchPhotos(presenter: ContractInterface.Presenter, tag: String, extras: String)
     }
 
 }

@@ -28,8 +28,8 @@ class ListPhotosModel: ContractInterface.Model {
         webService = ServiceAPI.client.create(ServiceInterface::class.java)
     }
 
-    override fun searchPhotos(presenter: ContractInterface.Presenter, tag: String) {
-        val call = this.webService?.searchPhotos(Constant.API_KEY, tag)
+    override fun searchPhotos(presenter: ContractInterface.Presenter, tag: String, extras:String) {
+        val call = this.webService?.searchPhotos(Constant.API_KEY, tag, extras)
         call?.enqueue(object : Callback<SearchResponse> {
             override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {
                 if(response?.isSuccessful){
