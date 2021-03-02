@@ -1,4 +1,4 @@
-package com.example.testflickr.features.listPhotos.adapter
+package com.example.testflickr.features.listPhotos
 
 import android.content.Context
 import android.view.LayoutInflater

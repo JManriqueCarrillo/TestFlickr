@@ -1,4 +1,4 @@
-package com.example.testflickr.features.listPhotos.view
+package com.example.testflickr.features.listPhotos
 
 import android.app.SearchManager
 import android.content.Context
@@ -12,27 +12,39 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testflickr.R
+import com.example.testflickr.dagger.component.DaggerActivityComponent
+import com.example.testflickr.dagger.module.ActivityModule
 import com.example.testflickr.databinding.ActivityMainBinding
 import com.example.testflickr.entities.responses.PhotoResponse
-import com.example.testflickr.features.detailPhoto.view.DetailActivity
-import com.example.testflickr.features.listPhotos.adapter.ListPhotosAdapter
-import com.example.testflickr.features.listPhotos.contract.ContractInterface
-import com.example.testflickr.features.listPhotos.presenter.ListPhotosPresenter
+import com.example.testflickr.features.detailPhoto.DetailActivity
 import com.example.testflickr.interfaces.ItemClickListener
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), ContractInterface.View, SearchView.OnQueryTextListener, ItemClickListener {
+class ListPhotosActivity : AppCompatActivity(), ListPhotosContract.View, SearchView.OnQueryTextListener, ItemClickListener {
+
+    @Inject
+    lateinit var presenter: ListPhotosPresenter
 
     private lateinit var binding: ActivityMainBinding
-    private var presenter: ListPhotosPresenter? = null
+
     private lateinit var searchView : SearchView
     private val EXTRAS_REQUEST = "owner_name,description,last_update"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
-        presenter = ListPhotosPresenter(this)
+
+        injectDependency()
+        presenter.attach(this)
+    }
+
+    private fun injectDependency() {
+        val activityComponent = DaggerActivityComponent.builder()
+            .activityModule(ActivityModule(this))
+            .build()
+
+        activityComponent.inject(this)
     }
 
     override fun showSearchList(data: List<PhotoResponse>) {

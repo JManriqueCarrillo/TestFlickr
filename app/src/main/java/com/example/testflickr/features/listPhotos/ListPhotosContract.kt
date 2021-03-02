@@ -1,8 +1,8 @@
-package com.example.testflickr.features.listPhotos.contract
+package com.example.testflickr.features.listPhotos
 
 import com.example.testflickr.entities.responses.PhotoResponse
 
-interface ContractInterface {
+class ListPhotosContract {
 
     interface View{
         fun showProgress()
@@ -13,6 +13,9 @@ interface ContractInterface {
     }
 
     interface Presenter{
+
+        fun attach(view: View)
+
         fun searchPhotos(tag: String, extras: String)
         fun showSearchList(data: List<PhotoResponse>)
 

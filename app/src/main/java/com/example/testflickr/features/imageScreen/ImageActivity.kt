@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.testflickr.databinding.ActivityImageBinding
-import com.example.testflickr.features.detailPhoto.view.DetailActivity
+import com.example.testflickr.features.detailPhoto.DetailActivity
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 

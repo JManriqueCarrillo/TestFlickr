@@ -11,14 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestFlickr">
-        <activity android:name=".features.listPhotos.view.MainActivity"
+        <activity android:name=".features.listPhotos.ListPhotosActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".features.detailPhoto.view.DetailActivity"/>
+        <activity android:name=".features.detailPhoto.DetailActivity"/>
         <activity android:name=".features.imageScreen.ImageActivity"/>
 
         <provider

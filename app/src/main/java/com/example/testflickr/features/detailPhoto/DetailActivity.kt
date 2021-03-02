@@ -1,4 +1,4 @@
-package com.example.testflickr.features.detailPhoto.view
+package com.example.testflickr.features.detailPhoto
 
 import android.content.Intent
 import android.graphics.Bitmap
