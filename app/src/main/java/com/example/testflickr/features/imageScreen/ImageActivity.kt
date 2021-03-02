@@ -9,7 +9,6 @@ import com.example.testflickr.features.detailPhoto.DetailActivity
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 
-
 class ImageActivity  : AppCompatActivity() {
 
     private lateinit var binding: ActivityImageBinding

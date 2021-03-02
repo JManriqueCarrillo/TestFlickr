@@ -1,6 +1,5 @@
 package com.example.testflickr.dagger.component
 
-import android.app.Application
 import com.example.testflickr.BaseApp
 import com.example.testflickr.dagger.module.ApplicationModule
 import dagger.Component

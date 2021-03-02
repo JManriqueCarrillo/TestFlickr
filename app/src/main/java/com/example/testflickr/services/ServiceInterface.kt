@@ -1,6 +1,5 @@
 package com.example.testflickr.services
 
-
 import com.example.testflickr.entities.responses.SearchResponse
 import com.example.testflickr.interfaces.Constant
 import retrofit2.Call

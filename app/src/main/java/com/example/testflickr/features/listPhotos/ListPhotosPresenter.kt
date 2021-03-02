@@ -1,8 +1,6 @@
 package com.example.testflickr.features.listPhotos
 
 import com.example.testflickr.entities.responses.PhotoResponse
-import com.example.testflickr.features.listPhotos.ListPhotosContract
-import com.example.testflickr.features.listPhotos.ListPhotosModel
 
 class ListPhotosPresenter(): ListPhotosContract.Presenter {
 

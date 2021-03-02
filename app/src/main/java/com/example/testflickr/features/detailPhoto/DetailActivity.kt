@@ -16,7 +16,6 @@ import com.squareup.picasso.Picasso
 import com.squareup.picasso.Picasso.LoadedFrom
 import com.squareup.picasso.Target
 
-
 class DetailActivity : AppCompatActivity() {
 
     companion object{

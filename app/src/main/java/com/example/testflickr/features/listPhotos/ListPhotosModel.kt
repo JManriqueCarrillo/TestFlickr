@@ -1,14 +1,11 @@
 package com.example.testflickr.features.listPhotos
 
-import android.util.Log
 import com.example.testflickr.entities.responses.SearchResponse
 import com.example.testflickr.interfaces.Constant
 import com.example.testflickr.services.ServiceAPI
 import com.example.testflickr.services.ServiceInterface
-import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.HttpException
 import retrofit2.Response
 
 class ListPhotosModel: ListPhotosContract.Model {
