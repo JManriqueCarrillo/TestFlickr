@@ -7,9 +7,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testflickr.R
 import com.example.testflickr.dagger.component.DaggerActivityComponent
@@ -20,13 +20,12 @@ import com.example.testflickr.features.detailPhoto.DetailActivity
 import com.example.testflickr.interfaces.ItemClickListener
 import javax.inject.Inject
 
-class ListPhotosActivity : AppCompatActivity(), ListPhotosContract.View, SearchView.OnQueryTextListener, ItemClickListener {
+class ListPhotosActivity : AppCompatActivity(), ListPhotosContract.View, ItemClickListener {
 
     @Inject
     lateinit var presenter: ListPhotosContract.Presenter
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var searchView : SearchView
     private val EXTRAS_REQUEST = "owner_name,description,last_update"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,25 +59,21 @@ class ListPhotosActivity : AppCompatActivity(), ListPhotosContract.View, SearchV
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.search_menu, menu)
-
-        // Associate searchable configuration with the SearchView
+        
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        searchView = menu.findItem(R.id.action_search).actionView as SearchView
+        val searchView = menu.findItem(R.id.action_search).actionView as SearchView
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
-        searchView.setOnQueryTextListener(this)
-        searchView.queryHint = getString(R.string.search_hint)
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { presenter?.searchPhotos(it, EXTRAS_REQUEST) }
+                return true
+            }
 
-        return true
-    }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
 
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        query?.let { presenter?.searchPhotos(it, EXTRAS_REQUEST) }
-        binding.root.hideKeyboard()
-        binding.root.requestFocus()
-        return true
-    }
-
-    override fun onQueryTextChange(newText: String?): Boolean {
         return true
     }
 
