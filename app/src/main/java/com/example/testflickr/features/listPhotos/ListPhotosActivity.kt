@@ -59,13 +59,14 @@ class ListPhotosActivity : AppCompatActivity(), ListPhotosContract.View, ItemCli
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.search_menu, menu)
-        
+
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu.findItem(R.id.action_search).actionView as SearchView
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let { presenter?.searchPhotos(it, EXTRAS_REQUEST) }
+                binding.root.hideKeyboard()
                 return true
             }
 

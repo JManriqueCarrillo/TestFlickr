@@ -4,6 +4,8 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.testflickr.R
 import com.example.testflickr.databinding.ActivityDetailBinding
@@ -13,6 +15,7 @@ import com.example.testflickr.utils.ImageUtils
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Picasso.LoadedFrom
 import com.squareup.picasso.Target
+
 
 class DetailActivity : AppCompatActivity() {
 
@@ -36,9 +39,13 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         getParams()
         loadView()
         setListeners()
+
+
+
     }
 
     private fun getParams(){
@@ -58,10 +65,6 @@ class DetailActivity : AppCompatActivity() {
      }
 
     private fun setListeners(){
-        binding.shareButton.setOnClickListener {
-            shareItem(imageUrl)
-        }
-
         binding.detailImage.setOnClickListener{
             val intent = Intent(this, ImageActivity::class.java)
             intent.putExtra(PARAM_IMAGE_URL, imageUrl)
@@ -69,12 +72,28 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.share_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item!!.itemId) {
+            R.id.action_share -> {
+                shareItem(imageUrl)
+            }
+        }
+        return true
+    }
+
     private fun shareItem(url: String?) {
         Picasso.with(applicationContext).load(url).into(object : Target {
             override fun onBitmapLoaded(bitmap: Bitmap?, from: LoadedFrom?) {
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.type = "image/*"
-                intent.putExtra(Intent.EXTRA_STREAM, ImageUtils.getLocalBitmapUri(applicationContext, bitmap!!))
+                intent.putExtra(Intent.EXTRA_STREAM,
+                    ImageUtils.getLocalBitmapUri(applicationContext,
+                        bitmap!!))
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 startActivity(Intent.createChooser(intent, "Share Image"))
             }
