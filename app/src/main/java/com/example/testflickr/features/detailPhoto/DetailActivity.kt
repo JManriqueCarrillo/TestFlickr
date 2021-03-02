@@ -39,13 +39,9 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         getParams()
         loadView()
         setListeners()
-
-
-
     }
 
     private fun getParams(){
