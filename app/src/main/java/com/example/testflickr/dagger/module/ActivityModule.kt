@@ -18,14 +18,4 @@ class ActivityModule(private var activity: Activity) {
     fun provideListPhotosPresenter(): ListPhotosContract.Presenter{
         return ListPhotosPresenter()
     }
-
-    @Provides
-    fun provideDetailActivity(): Activity {
-        return activity
-    }
-
-    @Provides
-    fun provideImageActivity(): Activity {
-        return activity
-    }
 }

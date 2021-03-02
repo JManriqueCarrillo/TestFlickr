@@ -6,12 +6,9 @@ import com.example.testflickr.features.imageScreen.ImageActivity
 import com.example.testflickr.features.listPhotos.ListPhotosActivity
 import dagger.Component
 
-
 @Component(modules = arrayOf(ActivityModule::class))
 interface ActivityComponent {
 
     fun inject(activity: ListPhotosActivity)
-    fun inject(activity: ImageActivity)
-    fun inject(activity: DetailActivity)
 
 }

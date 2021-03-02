@@ -23,10 +23,9 @@ import javax.inject.Inject
 class ListPhotosActivity : AppCompatActivity(), ListPhotosContract.View, SearchView.OnQueryTextListener, ItemClickListener {
 
     @Inject
-    lateinit var presenter: ListPhotosPresenter
+    lateinit var presenter: ListPhotosContract.Presenter
 
     private lateinit var binding: ActivityMainBinding
-
     private lateinit var searchView : SearchView
     private val EXTRAS_REQUEST = "owner_name,description,last_update"
 

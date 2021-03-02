@@ -4,13 +4,10 @@ import com.example.testflickr.entities.responses.PhotoResponse
 import com.example.testflickr.features.listPhotos.ListPhotosContract
 import com.example.testflickr.features.listPhotos.ListPhotosModel
 
-
 class ListPhotosPresenter(): ListPhotosContract.Presenter {
-
 
     private lateinit var view: ListPhotosContract.View
     private var model: ListPhotosContract.Model = ListPhotosModel()
-
 
     override fun attach(view: ListPhotosContract.View) {
         this.view = view
@@ -30,6 +27,4 @@ class ListPhotosPresenter(): ListPhotosContract.Presenter {
         view.hideProgress()
         view.showError(text)
     }
-
-
 }
